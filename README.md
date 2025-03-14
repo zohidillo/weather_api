@@ -1,6 +1,7 @@
 # Weather App
 
-Bu loyiha **Django** asosida yaratilgan bo'lib, ob-havo ma'lumotlarini olish va saqlash uchun ishlatiladi. **Celery** va **Redis** yordamida fon vazifalarini bajaradi.
+Bu loyiha **Django** asosida yaratilgan bo'lib, ob-havo ma'lumotlarini olish va saqlash uchun ishlatiladi. **Celery** va
+**Redis** yordamida fon vazifalarini bajaradi.
 
 ## Talablar
 
@@ -45,6 +46,13 @@ Agar fon rejimida ishga tushirmoqchi bo‘lsangiz:
 
 ```bash
 docker-compose up -d --build
+```
+
+## Default qo'shiladigan user
+
+```
+username: admin
+password: 123
 ```
 
 ## Xizmatlar
