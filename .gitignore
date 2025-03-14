@@ -1,0 +1,19 @@
+venv
+.idea
+.idea/
+.env.dev
+
+# Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Django migrations
+*/migrations/
+*.pyc
+*.pyo
+
+db.sqlite3
+*.sqlite3
+
+/media/
+staticfiles/

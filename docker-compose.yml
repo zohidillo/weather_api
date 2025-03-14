@@ -1,0 +1,66 @@
+services:
+  web:
+    build: ./
+    container_name: "weather_web"
+    restart: always
+    command: bash entrypoint.sh
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 8080:8080
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+      - redis
+      - celery_worker
+      - celery_beat
+
+  db:
+    image: postgres:14
+    container_name: "weather_db"
+    volumes:
+      - db_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.dev
+    ports:
+      - 5432:5432
+
+  redis:
+    image: redis:latest
+    container_name: "weather_redis"
+    restart: always
+    ports:
+      - 6379:6379
+
+  celery_worker:
+    build: ./
+    container_name: "weather_celery_worker"
+    restart: always
+    command: celery -A config worker --loglevel=info
+    depends_on:
+      - redis
+      - db
+      - web
+    env_file:
+      - ./.env.dev
+    volumes:
+      - .:/usr/src/app
+
+  celery_beat:
+    build: ./
+    container_name: "weather_celery_beat"
+    restart: always
+    command: celery -A config beat --loglevel=info
+    depends_on:
+      - redis
+      - db
+      - web
+      - celery_worker
+    env_file:
+      - ./.env.dev
+    volumes:
+      - .:/usr/src/app
+
+volumes:
+  db_data:

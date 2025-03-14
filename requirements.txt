@@ -1,0 +1,12 @@
+Django
+django-environ
+psycopg2
+djangorestframework
+djangorestframework-simplejwt
+django-debug-toolbar
+whitenoise
+flake8
+black
+drf-yasg
+django-cors-headers
+django-filter

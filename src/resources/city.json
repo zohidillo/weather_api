@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1514588,
+        "name": "Andijon",
+        "state": "",
+        "country": "UZ",
+        "coord": {
+            "lon": 72.344238,
+            "lat": 40.782059
+        }
+    },
+        {
+        "id": 1513157,
+        "name": "Namangan",
+        "state": "",
+        "country": "UZ",
+        "coord": {
+            "lon": 71.672569,
+            "lat": 40.998299
+        }
+    }
+]
