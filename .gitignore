@@ -8,7 +8,7 @@ __pycache__/
 *.py[cod]
 
 # Django migrations
-*/migrations/
+*/migrations/*
 *.pyc
 *.pyo
 
