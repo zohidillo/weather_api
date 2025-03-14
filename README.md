@@ -76,20 +76,20 @@ docker logs -f weather_celery_beat
 
 ### 2. Ob-havo ma’lumotlarini faylga yuklash
 
-- **Endpoint:** `GET /api/weather/generate-file/`
+- **Endpoint:** `GET /api/file/`
 - **Tavsif:** Ma’lumotlarni Excel yoki CSV formatida yuklab olish
 - **Misol:**
   ```bash
-  GET /api/weather/generate-file/?file_type=csv
+  GET /api/file/?file_type=csv
   ```
 
 ### 3. Ob-havo ma’lumotlarini yangilash
 
-- **Endpoint:** `GET /api/weather/manual-refresh/`
+- **Endpoint:** `GET /api/weather/manual-update/`
 - **Tavsif:** API orqali yangi ob-havo ma’lumotlarini olish va bazaga saqlash
 - **Misol:**
   ```bash
-  GET /api/weather/manual-refresh/
+  GET /api/weather/manual-update/
   ```
   **Eslatma:** Agar bu API chaqirilmasa, ma’lumotlar avtomatik ravishda har **10 daqiqada** yangilanadi.
 
