@@ -1,26 +1,24 @@
 # Weather App
 
-Bu loyiha Django asosida yaratilgan bo'lib, unda Celery va Redis yordamida fon vazifalarini bajarish mumkin. Loyihaning
-asosiy maqsadi - ob-havo ma'lumotlarini qayta ishlash va saqlash.
+Bu loyiha **Django** asosida yaratilgan bo'lib, ob-havo ma'lumotlarini olish va saqlash uchun ishlatiladi. **Celery** va **Redis** yordamida fon vazifalarini bajaradi.
 
 ## Talablar
 
-Loyihani ishga tushirishdan oldin quyidagi dasturlar o'rnatilgan bo'lishi kerak:
+Loyihani ishga tushirish uchun quyidagilar kerak:
 
-- Docker
-- Docker Compose
-- https://openweathermap.org/api dan api key
+- **Docker** va **Docker Compose**
+- https://openweathermap.org/api dan **API kalit**
 
 ## O'rnatish
 
-Loyihani yuklab oling yoki klon qiling:
+Loyihani yuklab oling:
 
 ```bash
-git clone https://github.com/username/weather-app.git
+git clone https://github.com/zohidillo/weather_api.git
 cd weather-app
 ```
 
-`.env.dev` faylini yaratib, kerakli muhit o'zgaruvchilarini kiriting:
+`.env.dev` faylini yarating va quyidagi ma'lumotlarni kiriting:
 
 ```env
 DEBUG=1
@@ -32,36 +30,32 @@ POSTGRES_PASSWORD=password
 POSTGRES_DB=database_name
 
 DOCKER=0
-
 WEATHER_API=<weather_api>
-
 ```
 
-## Docker orqali ishga tushirish
+## Docker bilan ishga tushirish
 
-Barcha xizmatlarni ishga tushirish uchun quyidagi buyruqni bajaring:
+Barcha xizmatlarni ishga tushirish:
 
 ```bash
 docker-compose up --build
 ```
 
-Agar xizmatlarni fon rejimida ishlatmoqchi bo'lsangiz:
+Agar fon rejimida ishga tushirmoqchi bo‘lsangiz:
 
 ```bash
 docker-compose up -d --build
 ```
 
-## Xizmatlar haqida ma'lumot
+## Xizmatlar
 
-- **web**: Django web ilovasi
-- **db**: PostgreSQL bazasi
-- **redis**: Redis broker
-- **celery_worker**: Asosiy Celery worker
-- **celery_beat**: Periodik vazifalarni bajarish uchun Celery Beat
+- **web** - Django ilovasi
+- **db** - PostgreSQL bazasi
+- **redis** - Fon vazifalari uchun
+- **celery_worker** - Celery ishlovchisi
+- **celery_beat** - Celery Beat (jadval bo‘yicha vazifalar)
 
-## Loglarni ko'rish
-
-Agar xizmatlarning loglarini tekshirmoqchi bo'lsangiz:
+## Loglarni ko‘rish
 
 ```bash
 docker logs -f weather_web
@@ -69,62 +63,33 @@ docker logs -f weather_celery_worker
 docker logs -f weather_celery_beat
 ```
 
-## API larni ishlatish
+## API Endpointlar
 
-## 1. Weather List API
+### 1. Ob-havo ro‘yxatini olish
 
-**Endpoint:**
+- **Endpoint:** `GET /api/weather/`
+- **Tavsif:** Barcha ob-havo ma’lumotlarini olish
+- **Misol:**
+  ```bash
+  GET /api/weather/?city=1&added_at__gte=2024-03-01
+  ```
 
-```
-GET /api/weather/
-```
+### 2. Ob-havo ma’lumotlarini faylga yuklash
 
-**Tavsif:** Ob-havo ma’lumotlarini olish uchun ishlatiladi.
+- **Endpoint:** `GET /api/weather/generate-file/`
+- **Tavsif:** Ma’lumotlarni Excel yoki CSV formatida yuklab olish
+- **Misol:**
+  ```bash
+  GET /api/weather/generate-file/?file_type=csv
+  ```
 
-```
-GET /api/weather/?city=1&added_at__gte=2024-03-01
-```
+### 3. Ob-havo ma’lumotlarini yangilash
 
----
-
-## 2. Generate Weather File API
-
-**Endpoint:**
-
-```
-GET /api/weather/generate-file/
-```
-
-**Tavsif:** Ob-havo ma’lumotlarini **Excel yoki CSV** formatida yuklab olish uchun ishlatiladi.
-
-**Misol:**
-
-```
-GET /api/weather/generate-file/?file_type=csv
-```
-
----
-
-## 3. Manual Refresh Weather Data
-
-**Endpoint:**
-
-```
-GET /api/weather/manual-refresh/
-```
-
-**Tavsif:** Shaharlar bo‘yicha **yangi ob-havo ma’lumotlarini** API orqali olish va bazaga saqlash uchun ishlatiladi.
-bu api ishlatilmasa malumotlar har 10 daqiqada bazaga saqlamadi.
-
-**Misol:**
-
-```
-GET /api/weather/manual-refresh/
-```
-
-**Natija:** Bazaga yangi ob-havo ma’lumotlari qo‘shiladi va qaytariladi.
-
----
-
-
+- **Endpoint:** `GET /api/weather/manual-refresh/`
+- **Tavsif:** API orqali yangi ob-havo ma’lumotlarini olish va bazaga saqlash
+- **Misol:**
+  ```bash
+  GET /api/weather/manual-refresh/
+  ```
+  **Eslatma:** Agar bu API chaqirilmasa, ma’lumotlar avtomatik ravishda har **10 daqiqada** yangilanadi.
 
