@@ -13,3 +13,5 @@ django-filter
 django-celery-beat
 celery
 redis
+openpyxl
+requests
