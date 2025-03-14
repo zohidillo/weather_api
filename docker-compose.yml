@@ -41,7 +41,6 @@ services:
     depends_on:
       - redis
       - db
-      - web
     env_file:
       - ./.env.dev
     volumes:
@@ -55,7 +54,6 @@ services:
     depends_on:
       - redis
       - db
-      - web
       - celery_worker
     env_file:
       - ./.env.dev
