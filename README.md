@@ -15,7 +15,7 @@ Loyihani yuklab oling:
 
 ```bash
 git clone https://github.com/zohidillo/weather_api.git
-cd weather-app
+cd weather_api
 ```
 
 `.env.dev` faylini yarating va quyidagi ma'lumotlarni kiriting:
