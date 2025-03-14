@@ -10,3 +10,6 @@ black
 drf-yasg
 django-cors-headers
 django-filter
+django-celery-beat
+celery
+redis

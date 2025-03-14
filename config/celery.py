@@ -16,7 +16,7 @@ app.conf.update(
 app.conf.beat_schedule = {
     "fetch_weather_data_every_10_min": {
         "task": "src.core.tasks.fetch_weather_data",
-        "schedule": crontab(minute="*/1"),  # Har 10 daqiqada
+        "schedule": crontab(minute="*/10"),  # Har 10 daqiqada
     },
 }
 app.autodiscover_tasks()
